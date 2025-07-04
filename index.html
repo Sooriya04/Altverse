@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Altverse</title>
+
+    <!-- Bootstrap & Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="stylesheet" href="/src/css/style.css" />
+  </head>
+
+  <body>
+    <div class="stars"></div>
+
+    <!-- Header Section -->
+    <div class="altverse-box text-center">
+      <div class="space-icon"><i class="bi bi-stars"></i></div>
+      <h1>Altverse</h1>
+      <div class="subtitle">
+        Explore alternate universes with AI-powered What If simulations
+      </div>
+      <div id="attemptCounter" class="attempt-counter">Attempts left: 5/5</div>
+    </div>
+
+    <!-- Form -->
+    <div class="container">
+      <div class="altverse-box" id="formBox">
+        <form id="predictForm">
+          <div class="mb-3">
+            <label for="question" class="form-label">Your Scenario</label>
+            <input
+              type="text"
+              class="form-control"
+              id="question"
+              placeholder="e.g. What if Earth had two moons?"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary w-100">
+            <i class="bi bi-send-fill"></i> Simulate
+          </button>
+        </form>
+        <div id="loadingState" class="mt-4 d-none">
+          <p>🔭 Analyzing life in another Earth...</p>
+        </div>
+        <div id="limitMessage" class="d-none text-warning text-center">
+          <p>
+            <strong>❌ You've reached your daily limit (5 simulations).</strong>
+          </p>
+          <button class="btn btn-primary mt-2" onclick="location.reload()">
+            🔁 Try Again Tomorrow
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Result Cards -->
+    <div
+      id="resultContainer"
+      class="container-fluid px-lg-5 d-none animate__animated animate__fadeIn mb-4"
+    >
+      <div class="text-center mt-4 mb-5">
+        <button class="btn btn-outline-info" onclick="location.reload()">
+          🔁 Try Another Scenario
+        </button>
+      </div>
+
+      <div class="row row-cols-1 row-cols-md-3 g-4" id="resultCards"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="container text-center">
+      <div
+        class="d-flex flex-column flex-md-row justify-content-between align-items-center"
+      >
+        <p class="mb-2 mb-md-0">© 2025 Altverse</p>
+        <ul class="nav justify-content-center">
+          <li class="nav-item text-light">
+            Crafted by
+            <a
+              href="https://sooriya04.github.io/sooriya/"
+              target="_blank"
+              class="text-light fw-bold text-decoration-none"
+              >Sooriya</a
+            >
+          </li>
+        </ul>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/src/js/script.js"></script>
+  </body>
+</html>
