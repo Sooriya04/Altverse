@@ -55,6 +55,7 @@ form.addEventListener("submit", async function (e) {
     });
 
     const result = await res.json();
+    console.log(result)
     loading.classList.add("d-none");
     resultContainer.classList.remove("d-none");
 
