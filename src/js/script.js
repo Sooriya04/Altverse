@@ -1,4 +1,4 @@
-const MAX_ATTEMPTS = 5;
+const MAX_ATTEMPTS = 3;
 const STORAGE_KEY = "altverse-limit";
 
 const form = document.getElementById("predictForm");
