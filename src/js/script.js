@@ -13,10 +13,7 @@ function getLimitData() {
   const saved = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
   const today = new Date().toDateString();
   if (saved.date !== today) {
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify({ date: today, count: 0 })
-    );
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ date: today, count: 0 }));
     return { date: today, count: 0 };
   }
   return saved;
@@ -61,40 +58,53 @@ form.addEventListener("submit", async function (e) {
     loading.classList.add("d-none");
     resultContainer.classList.remove("d-none");
 
-    const { good, medium, bad } = result.result;
+    if (result.result && result.result.good && result.result.medium && result.result.bad) {
+      const { good, medium, bad } = result.result;
 
-    resultCards.innerHTML = `
-          <div class="col">
-            <div class="card outcome-card border-success h-100">
-              <div class="card-header bg-success text-dark fw-bold">🌟 Utopian Outcome</div>
-              <div class="card-body text-light"><ul>${good
-                .map((i) => `<li>${i}</li>`)
-                .join("")}</ul></div>
-            </div>
+      resultCards.innerHTML = `
+        <div class="col">
+          <div class="card outcome-card border-success h-100">
+            <div class="card-header bg-success text-dark fw-bold">🌟 Utopian Outcome</div>
+            <div class="card-body text-light"><ul>${good.map(i => `<li>${i}</li>`).join("")}</ul></div>
           </div>
-          <div class="col">
-            <div class="card outcome-card border-warning h-100">
-              <div class="card-header bg-warning text-dark fw-bold">⚖️ Mixed Outcome</div>
-              <div class="card-body text-light"><ul>${medium
-                .map((i) => `<li>${i}</li>`)
-                .join("")}</ul></div>
-            </div>
+        </div>
+        <div class="col">
+          <div class="card outcome-card border-warning h-100">
+            <div class="card-header bg-warning text-dark fw-bold">⚖️ Mixed Outcome</div>
+            <div class="card-body text-light"><ul>${medium.map(i => `<li>${i}</li>`).join("")}</ul></div>
           </div>
-          <div class="col">
-            <div class="card outcome-card border-danger h-100">
-              <div class="card-header bg-danger text-dark fw-bold">⚠️ Dystopian Outcome</div>
-              <div class="card-body text-light"><ul>${bad
-                .map((i) => `<li>${i}</li>`)
-                .join("")}</ul></div>
-            </div>
+        </div>
+        <div class="col">
+          <div class="card outcome-card border-danger h-100">
+            <div class="card-header bg-danger text-dark fw-bold">⚠️ Dystopian Outcome</div>
+            <div class="card-body text-light"><ul>${bad.map(i => `<li>${i}</li>`).join("")}</ul></div>
           </div>
-        `;
+        </div>
+      `;
+    } else {
+      const fallback = result.raw || "❌ Could not generate a response.";
+      resultCards.innerHTML = `
+        <div class="col">
+          <div class="card bg-dark border-warning text-light p-4">
+            <h5 class="text-warning">⚠️ Notice</h5>
+            <p>${fallback}</p>
+          </div>
+        </div>
+      `;
+    }
 
     incrementLimit();
     resultContainer.scrollIntoView({ behavior: "smooth" });
   } catch (err) {
     loading.classList.add("d-none");
-    resultCards.innerHTML = `<p class="text-danger">❌ Something went wrong. Try again later.</p>`;
+    resultCards.innerHTML = `
+      <div class="col">
+        <div class="card bg-dark border-danger text-light p-4">
+          <h5 class="text-danger">❌ Error</h5>
+          <p>Something went wrong. Please try again later.</p>
+        </div>
+      </div>
+    `;
     resultContainer.classList.remove("d-none");
   }
 });
