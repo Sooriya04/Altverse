@@ -11,7 +11,7 @@ body {
 }
 
 .stars {
-  background: transparent url("src/images/space.jpg") repeat;
+  background: transparent url("../images/space.jpg") repeat;
   position: fixed;
   width: 100%;
   height: 100%;
